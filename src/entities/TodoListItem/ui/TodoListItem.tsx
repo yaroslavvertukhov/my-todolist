@@ -1,16 +1,20 @@
 import { Checkbox } from "primereact/checkbox";
 import style from './style.module.css';
+import classNames from "classnames";
 
 interface TodoListItem {
+    id: string
     label: string
     checked: boolean
-    onChange: () => void
+    onChange: (id: string) => void
 }
 
-export function TodoListItem({label, checked, onChange}: TodoListItem) {
+export function TodoListItem({id, label, checked, onChange}: TodoListItem) {
     return (
-        <label className={style.container}>
-            <Checkbox name="pizza" value="Cheese" onChange={onChange} checked={checked} />
+        <label className={classNames(style.container, {
+            [style.checked]: checked
+        })}>
+            <Checkbox name="pizza" value="Cheese" onChange={() => onChange(id)} checked={checked} />
             <span className="ml-2">{label}</span>
         </label>
     )

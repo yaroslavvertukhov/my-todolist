@@ -7,6 +7,10 @@
     cursor: pointer;
 }
 
+.checked {
+    text-decoration: line-through;
+}
+
 .container:last-child {
     border: none;
 }
