@@ -6,6 +6,8 @@ import style from './style.module.css';
 import { ETabs, useStore } from "../model/store";
 import { useState } from "react";
 import { SelectButton } from "primereact/selectbutton";
+import { Button } from "primereact/button";
+import { declension } from "../../../shared/lib/declension";
 
 
 export function TodoList() {
@@ -60,7 +62,7 @@ export function TodoList() {
             </div>
             <div className={style.list}>
                 {
-                    getItems().length ? getItems().map((item) => (
+                    getItems(getActiveTab()).length ? getItems(getActiveTab()).map((item) => (
                         <TodoListItem 
                             key={item.id}
                             id={item.id}
@@ -80,13 +82,13 @@ export function TodoList() {
             </div>
             <div className={style.footer}>
                 <div>
-                    осталось 2 задачи
+                    осталось {getItems((ETabs.ACTIVE)).length} {declension(getItems((ETabs.ACTIVE)).length, ['задача', 'задачи', 'задач'])}
                 </div>
                 <div className={style.tabs}>
                     <SelectButton value={getActiveTab()} onChange={(e) => changeTab(e.value)} optionLabel="name" options={tabs} />
                 </div>
                 <div onClick={clearComletedTasks}>
-                    Удалить все завершенные
+                    <Button label="Удалить все завершенные" severity="danger" text raised />
                 </div>
             </div>
         </>

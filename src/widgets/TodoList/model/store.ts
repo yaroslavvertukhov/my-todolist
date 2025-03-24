@@ -80,8 +80,8 @@ export function useStore() {
         return state.activeTab
     }
 
-    const getItems = () => {
-        switch (state.activeTab) {
+    const getItems = (tab: ETabs) => {
+        switch (tab) {
             case ETabs.ALL:
                 return state.items
             case ETabs.ACTIVE:
