@@ -4,14 +4,15 @@ import classNames from "classnames";
 
 interface TodoListItem {
     id: string
+    dataTestid?: string
     label: string
     checked: boolean
     onChange: (id: string) => void
 }
 
-export function TodoListItem({id, label, checked, onChange}: TodoListItem) {
+export function TodoListItem({id, dataTestid, label, checked, onChange}: TodoListItem) {
     return (
-        <label className={classNames(style.container, {
+        <label data-testId={dataTestid} className={classNames(style.container, {
             [style.checked]: checked
         })}>
             <Checkbox name="pizza" value="Cheese" onChange={() => onChange(id)} checked={checked} />

@@ -8,6 +8,7 @@ import { useState } from "react";
 import { SelectButton } from "primereact/selectbutton";
 import { Button } from "primereact/button";
 import { declension } from "../../../shared/lib/declension";
+import { ETestIdCommon } from "../tests/testId";
 
 
 export function TodoList() {
@@ -37,15 +38,19 @@ export function TodoList() {
         }
     }
 
+    const activeTabItems = getItems(getActiveTab());
+
     return (
         <>
             <div className={style.head}>
                 <IconField>
                     <InputIcon 
+                        data-testid={ETestIdCommon.CREATE_TASK_ICON}
                         className="pi pi-plus"
                         onClick={createTask}
                     ></InputIcon>
                     <InputText 
+                        data-testid={ETestIdCommon.CREATE_TASK_INPUT}
                         value={newTaskText}
                         onChange={(e) => setNewTaskText(e.target.value)}
                         onKeyDown={(e) => e.code === 'Enter' && createTask()}
@@ -62,9 +67,10 @@ export function TodoList() {
             </div>
             <div className={style.list}>
                 {
-                    getItems(getActiveTab()).length ? getItems(getActiveTab()).map((item) => (
-                        <TodoListItem 
+                    activeTabItems.length ? activeTabItems.map((item) => (
+                        <TodoListItem
                             key={item.id}
+                            dataTestid={ETestIdCommon.LIST_ITEM}
                             id={item.id}
                             label={item.label}
                             checked={item.checked}
@@ -85,7 +91,7 @@ export function TodoList() {
                     осталось {getItems((ETabs.ACTIVE)).length} {declension(getItems((ETabs.ACTIVE)).length, ['задача', 'задачи', 'задач'])}
                 </div>
                 <div className={style.tabs}>
-                    <SelectButton value={getActiveTab()} onChange={(e) => changeTab(e.value)} optionLabel="name" options={tabs} />
+                    <SelectButton data-testId={ETestIdCommon.TABS} value={getActiveTab()} onChange={(e) => changeTab(e.value)} optionLabel="name" options={tabs} />
                 </div>
                 <div onClick={clearComletedTasks}>
                     <Button label="Удалить все завершенные" severity="danger" text raised />

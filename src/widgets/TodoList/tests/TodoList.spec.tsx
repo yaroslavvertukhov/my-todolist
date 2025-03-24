@@ -1,0 +1,86 @@
+import { beforeAll, describe, expect, it } from "vitest";
+import {cleanup, render, screen} from '@testing-library/react'
+import userEvent, {UserEvent} from '@testing-library/user-event'
+import { TodoList } from "../ui";
+import { ETestIdCommon } from "./testId";
+
+const renderTodoList = () => {
+    cleanup();
+    render(
+        <TodoList />
+    )
+}
+
+const tasks = [
+    'Тестовая задача созданная кликом по иконке',
+    'Тестовая задача созданная кнопкой Enter',
+]
+
+describe('Проверка TodoList', () => {
+    beforeAll(() => {
+        renderTodoList();
+    })
+
+    describe('Создание задач', async () => {
+        it('Добавление задач кликом по иконке и по нажатию на Enter', async () => {
+            const input = screen.getByTestId(ETestIdCommon.CREATE_TASK_INPUT);
+            const icon = screen.getByTestId(ETestIdCommon.CREATE_TASK_ICON);
+
+            // Создание задачи кликом по иконке
+            await userEvent.click(input)
+            await userEvent.type(input, tasks[0]);
+
+            expect(input.value).toBe(tasks[0]);
+
+            await userEvent.click(icon);
+
+            expect(input.value).toBe('');
+
+            
+            // Создание задачи кнопкой Enter
+            await userEvent.click(input)
+            await userEvent.type(input, tasks[1]);
+
+            expect(input.value).toBe(tasks[1]);
+
+            await userEvent.keyboard("{Enter}");
+
+            expect(input.value).toBe('');
+        })
+    })
+
+    describe('Работа с задачами', async () => {
+        it('Проверка отображения задач на вкладке Все', async () => {
+            const tabs = screen.getByTestId(ETestIdCommon.TABS);
+            const selectedTab = tabs.querySelector('.p-highlight > span');
+
+            expect(selectedTab.textContent).toBe('Все');
+
+            const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
+
+            expect(items.length).toBe(2);
+        })
+
+        // it('Проверка отображения задач на вкладке Активные', async () => {
+        //     const tabs = screen.getByTestId(ETestIdCommon.TABS);
+        //     const selectedTab = tabs.querySelector('.p-highlight > span');
+
+        //     expect(selectedTab.textContent).toBe('Все');
+
+        //     const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
+
+        //     expect(items.length).toBe(2);
+        // })
+
+        // it('Проверка отображения задач на вкладке Завершенные', async () => {
+        //     const tabs = screen.getByTestId(ETestIdCommon.TABS);
+        //     const selectedTab = tabs.querySelector('.p-highlight > span');
+
+        //     expect(selectedTab.textContent).toBe('Все');
+
+        //     const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
+
+        //     expect(items.length).toBe(2);
+        // })
+    })
+})
