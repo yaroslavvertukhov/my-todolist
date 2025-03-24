@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import {cleanup, render, screen} from '@testing-library/react'
+import {cleanup, render, screen, within} from '@testing-library/react'
 import userEvent, {UserEvent} from '@testing-library/user-event'
 import { TodoList } from "../ui";
 import { ETestIdCommon } from "./testId";
@@ -63,13 +63,16 @@ describe('Проверка TodoList', () => {
 
         // it('Проверка отображения задач на вкладке Активные', async () => {
         //     const tabs = screen.getByTestId(ETestIdCommon.TABS);
-        //     const selectedTab = tabs.querySelector('.p-highlight > span');
+        //     const tab = screen.getByText('Активные');
 
-        //     expect(selectedTab.textContent).toBe('Все');
+        //     await userEvent.click(tab.closest('.p-button'))
+
+        //     const selectedTab = tabs.querySelector('.p-highlight > span');
+        //     expect(selectedTab.textContent).toBe('Активные');
 
         //     const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
 
-        //     expect(items.length).toBe(2);
+        //     expect(items.length).toBe(0);
         // })
 
         // it('Проверка отображения задач на вкладке Завершенные', async () => {
