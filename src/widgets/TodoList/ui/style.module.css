@@ -1,0 +1,20 @@
+.head {
+    margin-bottom: 10px;
+}
+
+.list {
+    border: 1px solid #00000021;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    height: 50px;
+    align-items: center;
+}
+
+.tabs {
+    display: flex;
+    gap: 15px;
+}
