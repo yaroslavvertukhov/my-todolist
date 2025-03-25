@@ -23,7 +23,7 @@ describe('Проверка TodoList', () => {
 
     describe('Создание задач', async () => {
         it('Добавление задач кликом по иконке и по нажатию на Enter', async () => {
-            const input = screen.getByTestId(ETestIdCommon.CREATE_TASK_INPUT);
+            const input: HTMLInputElement = screen.getByTestId(ETestIdCommon.CREATE_TASK_INPUT);
             const icon = screen.getByTestId(ETestIdCommon.CREATE_TASK_ICON);
 
             // Создание задачи кликом по иконке
@@ -54,10 +54,10 @@ describe('Проверка TodoList', () => {
             const tabs = screen.getByTestId(ETestIdCommon.TABS);
             const tab = screen.getByText('Активные');
         
-            await userEvent.click(tab.closest('.p-button'))
+            await userEvent.click(tab)
 
             const selectedTab = tabs.querySelector('.p-highlight > span');
-            expect(selectedTab.textContent).toBe('Активные');
+            expect(selectedTab?.textContent).toBe('Активные');
 
             const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
 
@@ -68,10 +68,12 @@ describe('Проверка TodoList', () => {
             const tabs = screen.getByTestId(ETestIdCommon.TABS);
             const tab = screen.getByText('Завершенные');
 
-            await userEvent.click(tab.closest('.p-button'))
+            expect(tab).toBeDefined();
+
+            await userEvent.click(tab)
 
             const selectedTab = tabs.querySelector('.p-highlight > span');
-            expect(selectedTab.textContent).toBe('Завершенные');
+            expect(selectedTab?.textContent).toBe('Завершенные');
 
             const items = screen.queryAllByTestId(ETestIdCommon.LIST_ITEM);
 
@@ -82,10 +84,10 @@ describe('Проверка TodoList', () => {
             const tabs = screen.getByTestId(ETestIdCommon.TABS);
             const tab = screen.getByText('Все');
         
-            await userEvent.click(tab.closest('.p-button'))
+            await userEvent.click(tab)
 
             const selectedTab = tabs.querySelector('.p-highlight > span');
-            expect(selectedTab.textContent).toBe('Все');
+            expect(selectedTab?.textContent).toBe('Все');
 
             const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
 
@@ -105,10 +107,10 @@ describe('Проверка TodoList', () => {
             const tabs = screen.getByTestId(ETestIdCommon.TABS);
             const tab = screen.getByText('Активные');
         
-            await userEvent.click(tab.closest('.p-button'))
+            await userEvent.click(tab)
 
             const selectedTab = tabs.querySelector('.p-highlight > span');
-            expect(selectedTab.textContent).toBe('Активные');
+            expect(selectedTab?.textContent).toBe('Активные');
 
             const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
 
@@ -119,10 +121,10 @@ describe('Проверка TodoList', () => {
             const tabs = screen.getByTestId(ETestIdCommon.TABS);
             const tab = screen.getByText('Завершенные');
 
-            await userEvent.click(tab.closest('.p-button'))
+            await userEvent.click(tab)
 
             const selectedTab = tabs.querySelector('.p-highlight > span');
-            expect(selectedTab.textContent).toBe('Завершенные');
+            expect(selectedTab?.textContent).toBe('Завершенные');
 
             const items = screen.queryAllByTestId(ETestIdCommon.LIST_ITEM);
 
@@ -133,10 +135,10 @@ describe('Проверка TodoList', () => {
             const tabs = screen.getByTestId(ETestIdCommon.TABS);
             const tab = screen.getByText('Все');
         
-            await userEvent.click(tab.closest('.p-button'))
+            await userEvent.click(tab)
 
             const selectedTab = tabs.querySelector('.p-highlight > span');
-            expect(selectedTab.textContent).toBe('Все');
+            expect(selectedTab?.textContent).toBe('Все');
 
             const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
 
@@ -149,10 +151,10 @@ describe('Проверка TodoList', () => {
             const tabs = screen.getByTestId(ETestIdCommon.TABS);
             const tab = screen.getByText('Активные');
         
-            await userEvent.click(tab.closest('.p-button'))
+            await userEvent.click(tab)
 
             const selectedTab = tabs.querySelector('.p-highlight > span');
-            expect(selectedTab.textContent).toBe('Активные');
+            expect(selectedTab?.textContent).toBe('Активные');
 
             const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
 
@@ -163,10 +165,10 @@ describe('Проверка TodoList', () => {
             const tabs = screen.getByTestId(ETestIdCommon.TABS);
             const tab = screen.getByText('Завершенные');
 
-            await userEvent.click(tab.closest('.p-button'))
+            await userEvent.click(tab)
 
             const selectedTab = tabs.querySelector('.p-highlight > span');
-            expect(selectedTab.textContent).toBe('Завершенные');
+            expect(selectedTab?.textContent).toBe('Завершенные');
 
             const items = screen.queryAllByTestId(ETestIdCommon.LIST_ITEM);
 
@@ -177,10 +179,10 @@ describe('Проверка TodoList', () => {
             const tabs = screen.getByTestId(ETestIdCommon.TABS);
             const tab = screen.getByText('Все');
         
-            await userEvent.click(tab.closest('.p-button'))
+            await userEvent.click(tab)
 
             const selectedTab = tabs.querySelector('.p-highlight > span');
-            expect(selectedTab.textContent).toBe('Все');
+            expect(selectedTab?.textContent).toBe('Все');
 
             const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
 
@@ -199,10 +201,10 @@ describe('Проверка TodoList', () => {
             const tabs = screen.getByTestId(ETestIdCommon.TABS);
             const tab = screen.getByText('Активные');
         
-            await userEvent.click(tab.closest('.p-button'))
+            await userEvent.click(tab)
 
             const selectedTab = tabs.querySelector('.p-highlight > span');
-            expect(selectedTab.textContent).toBe('Активные');
+            expect(selectedTab?.textContent).toBe('Активные');
 
             const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
 
@@ -213,10 +215,10 @@ describe('Проверка TodoList', () => {
             const tabs = screen.getByTestId(ETestIdCommon.TABS);
             const tab = screen.getByText('Завершенные');
 
-            await userEvent.click(tab.closest('.p-button'))
+            await userEvent.click(tab)
 
             const selectedTab = tabs.querySelector('.p-highlight > span');
-            expect(selectedTab.textContent).toBe('Завершенные');
+            expect(selectedTab?.textContent).toBe('Завершенные');
 
             const items = screen.queryAllByTestId(ETestIdCommon.LIST_ITEM);
 
@@ -227,10 +229,10 @@ describe('Проверка TodoList', () => {
             const tabs = screen.getByTestId(ETestIdCommon.TABS);
             const tab = screen.getByText('Все');
         
-            await userEvent.click(tab.closest('.p-button'))
+            await userEvent.click(tab)
 
             const selectedTab = tabs.querySelector('.p-highlight > span');
-            expect(selectedTab.textContent).toBe('Все');
+            expect(selectedTab?.textContent).toBe('Все');
 
             const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
 
