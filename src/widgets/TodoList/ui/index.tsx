@@ -91,10 +91,10 @@ export function TodoList() {
                     осталось {getItems((ETabs.ACTIVE)).length} {declension(getItems((ETabs.ACTIVE)).length, ['задача', 'задачи', 'задач'])}
                 </div>
                 <div className={style.tabs}>
-                    <SelectButton data-testId={ETestIdCommon.TABS} value={getActiveTab()} onChange={(e) => changeTab(e.value)} optionLabel="name" options={tabs} />
+                    <SelectButton data-testid={ETestIdCommon.TABS} value={getActiveTab()} onChange={(e) => changeTab(e.value)} optionLabel="name" options={tabs} />
                 </div>
                 <div onClick={clearComletedTasks}>
-                    <Button data-testId={ETestIdCommon.CLEAR_COMPLETED_TASKS} label="Удалить все завершенные" severity="danger" text raised />
+                    <Button data-testid={ETestIdCommon.CLEAR_COMPLETED_TASKS} label="Удалить все завершенные" severity="danger" text raised />
                 </div>
             </div>
         </>

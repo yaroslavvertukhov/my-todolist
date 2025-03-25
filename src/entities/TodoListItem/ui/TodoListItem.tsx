@@ -12,7 +12,7 @@ interface TodoListItem {
 
 export function TodoListItem({id, dataTestid, label, checked, onChange}: TodoListItem) {
     return (
-        <label data-testId={dataTestid} className={classNames(style.container, {
+        <label data-testid={dataTestid} className={classNames(style.container, {
             [style.checked]: checked
         })}>
             <Checkbox name="pizza" value="Cheese" onChange={() => onChange(id)} checked={checked} />

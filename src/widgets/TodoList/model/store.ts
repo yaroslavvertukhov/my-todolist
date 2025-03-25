@@ -112,10 +112,12 @@ export function useStore() {
     }
 
     const changeTab = (tab: ETabs) => {
-        dispatch({
-            type: EAction.CHANGE_TAB,
-            payload: tab
-        })
+        if (tab) {
+            dispatch({
+                type: EAction.CHANGE_TAB,
+                payload: tab
+            })
+        }
     }
 
     return {
