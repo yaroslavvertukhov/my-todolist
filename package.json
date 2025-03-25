@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://yaroslavvertukhov.github.io/my-todolist/",
+  "homepage": "https://yaroslavvertukhov.github.io/my-todolist",
   "scripts": {
     "start": "vite",
     "build": "tsc -b && vite build",
