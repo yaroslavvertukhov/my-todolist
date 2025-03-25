@@ -94,7 +94,7 @@ export function TodoList() {
                     <SelectButton data-testId={ETestIdCommon.TABS} value={getActiveTab()} onChange={(e) => changeTab(e.value)} optionLabel="name" options={tabs} />
                 </div>
                 <div onClick={clearComletedTasks}>
-                    <Button label="Удалить все завершенные" severity="danger" text raised />
+                    <Button data-testId={ETestIdCommon.CLEAR_COMPLETED_TASKS} label="Удалить все завершенные" severity="danger" text raised />
                 </div>
             </div>
         </>

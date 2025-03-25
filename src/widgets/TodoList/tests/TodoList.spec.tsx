@@ -50,10 +50,41 @@ describe('Проверка TodoList', () => {
     })
 
     describe('Работа с задачами', async () => {
-        it('Проверка отображения задач на вкладке Все', async () => {
+        it('Проверка отображения задач на вкладке Активные до взаимодействия с задачами', async () => {
             const tabs = screen.getByTestId(ETestIdCommon.TABS);
-            const selectedTab = tabs.querySelector('.p-highlight > span');
+            const tab = screen.getByText('Активные');
+        
+            await userEvent.click(tab.closest('.p-button'))
 
+            const selectedTab = tabs.querySelector('.p-highlight > span');
+            expect(selectedTab.textContent).toBe('Активные');
+
+            const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
+
+            expect(items.length).toBe(2);
+        })
+
+        it('Проверка отображения задач на вкладке Завершенные до взаимодействия с задачами', async () => {
+            const tabs = screen.getByTestId(ETestIdCommon.TABS);
+            const tab = screen.getByText('Завершенные');
+
+            await userEvent.click(tab.closest('.p-button'))
+
+            const selectedTab = tabs.querySelector('.p-highlight > span');
+            expect(selectedTab.textContent).toBe('Завершенные');
+
+            const items = screen.queryAllByTestId(ETestIdCommon.LIST_ITEM);
+
+            expect(items.length).toBe(0);
+        })
+
+        it('Проверка отображения задач на вкладке Все до взаимодействия с задачами', async () => {
+            const tabs = screen.getByTestId(ETestIdCommon.TABS);
+            const tab = screen.getByText('Все');
+        
+            await userEvent.click(tab.closest('.p-button'))
+
+            const selectedTab = tabs.querySelector('.p-highlight > span');
             expect(selectedTab.textContent).toBe('Все');
 
             const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
@@ -61,29 +92,150 @@ describe('Проверка TodoList', () => {
             expect(items.length).toBe(2);
         })
 
-        // it('Проверка отображения задач на вкладке Активные', async () => {
-        //     const tabs = screen.getByTestId(ETestIdCommon.TABS);
-        //     const tab = screen.getByText('Активные');
+        it('Нажатие на задачу и проверка класса стилизации завершения', async () => {
+            const task = screen.getByText(tasks[0]);
+        
+            await userEvent.click(task)
 
-        //     await userEvent.click(tab.closest('.p-button'))
+            const checkedTask = task.closest('[class~=_checked_]');
+            expect(checkedTask).toBeDefined();
+        })
 
-        //     const selectedTab = tabs.querySelector('.p-highlight > span');
-        //     expect(selectedTab.textContent).toBe('Активные');
+        it('Проверка отображения задач на вкладке Активные после взаимодействия с задачами', async () => {
+            const tabs = screen.getByTestId(ETestIdCommon.TABS);
+            const tab = screen.getByText('Активные');
+        
+            await userEvent.click(tab.closest('.p-button'))
 
-        //     const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
+            const selectedTab = tabs.querySelector('.p-highlight > span');
+            expect(selectedTab.textContent).toBe('Активные');
 
-        //     expect(items.length).toBe(0);
-        // })
+            const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
 
-        // it('Проверка отображения задач на вкладке Завершенные', async () => {
-        //     const tabs = screen.getByTestId(ETestIdCommon.TABS);
-        //     const selectedTab = tabs.querySelector('.p-highlight > span');
+            expect(items.length).toBe(1);
+        })
 
-        //     expect(selectedTab.textContent).toBe('Все');
+        it('Проверка отображения задач на вкладке Завершенные после взаимодействия с задачами', async () => {
+            const tabs = screen.getByTestId(ETestIdCommon.TABS);
+            const tab = screen.getByText('Завершенные');
 
-        //     const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
+            await userEvent.click(tab.closest('.p-button'))
 
-        //     expect(items.length).toBe(2);
-        // })
+            const selectedTab = tabs.querySelector('.p-highlight > span');
+            expect(selectedTab.textContent).toBe('Завершенные');
+
+            const items = screen.queryAllByTestId(ETestIdCommon.LIST_ITEM);
+
+            expect(items.length).toBe(1);
+        })
+
+        it('Проверка отображения задач на вкладке Все после взаимодействия с задачами', async () => {
+            const tabs = screen.getByTestId(ETestIdCommon.TABS);
+            const tab = screen.getByText('Все');
+        
+            await userEvent.click(tab.closest('.p-button'))
+
+            const selectedTab = tabs.querySelector('.p-highlight > span');
+            expect(selectedTab.textContent).toBe('Все');
+
+            const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
+
+            expect(items.length).toBe(2);
+        })
     })
+
+    describe('Проверка очистки завершенных', async () => {
+        it('Проверка отображения задач на вкладке Активные до взаимодействия с кнопкой очистки', async () => {
+            const tabs = screen.getByTestId(ETestIdCommon.TABS);
+            const tab = screen.getByText('Активные');
+        
+            await userEvent.click(tab.closest('.p-button'))
+
+            const selectedTab = tabs.querySelector('.p-highlight > span');
+            expect(selectedTab.textContent).toBe('Активные');
+
+            const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
+
+            expect(items.length).toBe(1);
+        })
+
+        it('Проверка отображения задач на вкладке Завершенные до взаимодействия с задачами', async () => {
+            const tabs = screen.getByTestId(ETestIdCommon.TABS);
+            const tab = screen.getByText('Завершенные');
+
+            await userEvent.click(tab.closest('.p-button'))
+
+            const selectedTab = tabs.querySelector('.p-highlight > span');
+            expect(selectedTab.textContent).toBe('Завершенные');
+
+            const items = screen.queryAllByTestId(ETestIdCommon.LIST_ITEM);
+
+            expect(items.length).toBe(1);
+        })
+
+        it('Проверка отображения задач на вкладке Все до взаимодействия с задачами', async () => {
+            const tabs = screen.getByTestId(ETestIdCommon.TABS);
+            const tab = screen.getByText('Все');
+        
+            await userEvent.click(tab.closest('.p-button'))
+
+            const selectedTab = tabs.querySelector('.p-highlight > span');
+            expect(selectedTab.textContent).toBe('Все');
+
+            const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
+
+            expect(items.length).toBe(2);
+        })
+
+        it('Нажатие на кнопку очистки', async () => {
+            const button = screen.getByTestId(ETestIdCommon.CLEAR_COMPLETED_TASKS);
+        
+            expect(button).toBeDefined();
+
+            await userEvent.click(button);
+        })
+
+        it('Проверка отображения задач на вкладке Активные после взаимодействия с кнопкой очистки', async () => {
+            const tabs = screen.getByTestId(ETestIdCommon.TABS);
+            const tab = screen.getByText('Активные');
+        
+            await userEvent.click(tab.closest('.p-button'))
+
+            const selectedTab = tabs.querySelector('.p-highlight > span');
+            expect(selectedTab.textContent).toBe('Активные');
+
+            const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
+
+            expect(items.length).toBe(1);
+        })
+
+        it('Проверка отображения задач на вкладке Завершенные после взаимодействия с задачами', async () => {
+            const tabs = screen.getByTestId(ETestIdCommon.TABS);
+            const tab = screen.getByText('Завершенные');
+
+            await userEvent.click(tab.closest('.p-button'))
+
+            const selectedTab = tabs.querySelector('.p-highlight > span');
+            expect(selectedTab.textContent).toBe('Завершенные');
+
+            const items = screen.queryAllByTestId(ETestIdCommon.LIST_ITEM);
+
+            expect(items.length).toBe(0);
+        })
+
+        it('Проверка отображения задач на вкладке Все после взаимодействия с задачами', async () => {
+            const tabs = screen.getByTestId(ETestIdCommon.TABS);
+            const tab = screen.getByText('Все');
+        
+            await userEvent.click(tab.closest('.p-button'))
+
+            const selectedTab = tabs.querySelector('.p-highlight > span');
+            expect(selectedTab.textContent).toBe('Все');
+
+            const items = screen.getAllByTestId(ETestIdCommon.LIST_ITEM);
+
+            expect(items.length).toBe(1);
+        })
+    });
+    
 })
